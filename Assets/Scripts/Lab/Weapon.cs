@@ -6,9 +6,10 @@ public abstract class Weapon : MonoBehaviour
 {
     
     [SerializeField] private int damage;
-    protected string owner;
-
-    // Property สำหรับ Damage
+    // #owner: IShootable
+    protected string owner = "IShootable";
+    
+    //Damage ที่ไว้ใช้เรียกในคลาสลูก
     public int Damage
     {
         get
@@ -20,10 +21,9 @@ public abstract class Weapon : MonoBehaviour
             damage = value;
         }
     }
-
-    
+    //OnHitWith
     public abstract void OnHitWith(Character character);
-
+    //Move
     public abstract void Move();
 
     public int GetShootDirection()
