@@ -1,25 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Crocodile : Enemy
+public class Crocodile : Enemy, IShootable
 {
     [SerializeField] private float attackRange;
-    public Player player;
+    [SerializeField] public Player player;
 
-    [SerializeField] private GameObject bullet;
-    [SerializeField] private Transform bulletSpawnPoint;
+    [field : SerializeField]public GameObject Bullet { get; set; }
+    [field: SerializeField]public Transform BulletSpawnPoint { get; set; }
+    [field: SerializeField] public float BulletSpawnTime { get; set; }
+    [field: SerializeField] public float BulletTimer { get; set; }
 
-    [SerializeField] private float bulletSpawnTime;
-    [SerializeField] private float bulletTimer;
+    void Start()
+    {
+        BulletTimer = 0.0f;
+        BulletSpawnTime = 5.0f;
+        DamageHit = 30;
+        attackRange = 6;
+        player = GameObject.FindObjectOfType<Player>();
+
+    }
 
     private void Update()
     {
-        bulletTimer -= Time.deltaTime;
+        BulletTimer -= Time.deltaTime;
 
         Behavior();
     }
-
     public override void Behavior()
     {
         Vector3 direction = player.transform.position - transform.position;
@@ -31,16 +41,17 @@ public class Crocodile : Enemy
         }
     }
 
-    private void Shoot()
+    public void Shoot()
     {
-        if (bulletTimer <= 0)
+        if(BulletTimer <= 0)
         {
-            Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
-
-            bulletTimer = bulletSpawnTime;
+            anim.SetTrigger("Shoot");
+            GameObject obj = Instantiate(Bullet, BulletSpawnPoint.position,Quaternion.identity);
+            Rock rock = obj.gameObject.GetComponent<Rock>();
+            rock.Init(20, this);
+            BulletTimer = BulletSpawnTime;
         }
         
     }
-
 
 }

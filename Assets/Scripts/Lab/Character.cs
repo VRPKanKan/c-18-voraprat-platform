@@ -24,8 +24,10 @@ public abstract class Character : MonoBehaviour
     {
         return Health <= 0;
     }
-    public void TakeDamge(int damage)
+    public void TakeDamage(int damage)
     {
         Health -= damage;
+        Debug.Log($"Take Damage");
+
     }
 }
