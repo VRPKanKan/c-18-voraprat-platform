@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character, IShootable
+public class Player : Character , IShootable
 {
     [SerializeField] private float attackRange;
     [SerializeField] public Player player;
@@ -11,8 +11,11 @@ public class Player : Character, IShootable
     [field: SerializeField] public Transform BulletSpawnPoint { get; set; }
     [field: SerializeField] public float BulletSpawnTime { get; set; }
     [field: SerializeField] public float BulletTimer { get; set; }
+    private void Start()
+    {
 
-    
+    }
+
     private void Update()
     {
         BulletTimer -= Time.deltaTime;

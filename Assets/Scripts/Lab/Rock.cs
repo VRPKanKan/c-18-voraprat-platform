@@ -6,7 +6,7 @@ using UnityEngine;
 public class Rock : Weapon
 {
     Rigidbody2D rb2d;
-    Vector2 force;
+    [SerializeField] Vector2 force;
 
     public override void Move()
     {
