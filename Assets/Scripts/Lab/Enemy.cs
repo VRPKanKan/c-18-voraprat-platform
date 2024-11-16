@@ -5,7 +5,9 @@ using UnityEngine;
 public abstract class Enemy : Character
 {
     private int damageHit;
+    
     public int DamageHit
+    
     {
         get
         {
@@ -16,7 +18,6 @@ public abstract class Enemy : Character
             damageHit = value;
         }
     }
-
     private void Start()
     {
         Behavior();

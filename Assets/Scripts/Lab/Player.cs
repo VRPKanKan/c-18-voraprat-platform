@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Player : Character , IShootable
@@ -47,6 +48,7 @@ public class Player : Character , IShootable
         }
 
     }
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

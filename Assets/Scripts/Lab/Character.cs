@@ -5,21 +5,18 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour
 {
     [SerializeField] private int health;
-    public int Health
-    {
-        get
-        {
-            return health;
-        }
-        set
-        {
-            health = value;
-        }
-    }
 
+    public int Health{ get { return health; } set { health = value; } }
+    public int maxHealth = 100;
+    public HealthBar healthBar;
     public Animator anim;
     public Rigidbody2D rb;
-    public HealthBar healthBar;
+    void Start()
+    {
+        Health = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
+
     public virtual void Init(int newHealth)
     {
         Health = newHealth;
@@ -39,8 +36,9 @@ public abstract class Character : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        Health -= damage;
-        Debug.Log($"Take Damage {Health}!!");
+        Health -= damage;        
+        Debug.Log($"Take Damage {health}!!");
         IsDead();
+        healthBar.SetHealth(Health); 
     }
 }
